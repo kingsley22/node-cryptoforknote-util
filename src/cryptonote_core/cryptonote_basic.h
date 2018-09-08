@@ -151,8 +151,18 @@ namespace cryptonote
     //extra
     std::vector<uint8_t> extra;
 
+    // Loki Specific
+    std::vector<uint64_t> output_unlock_times;
+    bool is_deregister;
+
     BEGIN_SERIALIZE()
       VARINT_FIELD(version)
+      // Loki Specific
+      if (version > 2)
+      {
+        FIELD(output_unlock_times)
+        FIELD(is_deregister)
+      }
       VARINT_FIELD(unlock_time)
       FIELD(vin)
       FIELD(vout)
